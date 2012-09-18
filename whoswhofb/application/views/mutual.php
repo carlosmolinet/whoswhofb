@@ -48,8 +48,13 @@
 	<div id="container" >
 		<header class="page_title">
 			<h1>WHO is WHO</h1>
-			<a href="/index.php/friends/"><img src="/img/estrella.png" width="360px" height="360px" class="logo" alt=""/></a>
+			<img src="img/star.png" width="360px" height="360px" class="logo" alt=""/>
 		</header>		
+		<ul>
+		    <?php foreach($friends as $friend){
+		   echo '<li><img src="https://graph.facebook.com/'.$friend['id'].'/picture"><a href="/index.php/friends/select/?friend_id='.$friend['id'].'">'.$friend['name']."</a></li>";
+		    }?>
+		    </ul>
 		<section class="clearfix">
 			<div class="destacados">
 				<ul>

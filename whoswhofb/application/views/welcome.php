@@ -8,11 +8,13 @@
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+</head>
+<body>
 	<div id="fb-root"></div>
 	<script>
 	  window.fbAsyncInit = function() {
 	    FB.init({
-	      appId      : 'YOUR_APP_ID', // App ID
+	      appId      : '444936682216984', // App ID
 	      channelUrl : '//WWW.YOUR_DOMAIN.COM/channel.html', // Channel File
 	      status     : true, // check login status
 	      cookie     : true, // enable cookies to allow the server to access the session
@@ -31,9 +33,6 @@
 	     ref.parentNode.insertBefore(js, ref);
 	   }(document));
 	</script>
-</head>
-
-<body>
 	<nav id="breadcrumb">
 		<ul class="inner">
 			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="item">

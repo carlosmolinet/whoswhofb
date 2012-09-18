@@ -29,7 +29,7 @@ class Welcome extends CI_Controller {
 		
 		$this->user = $this->session->userdata('user');
 	
-		$this->load->view('welcome_message');
+		$this->load->view('welcome');
 	}
 	
 	public function login()

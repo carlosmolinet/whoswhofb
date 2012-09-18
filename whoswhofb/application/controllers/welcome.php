@@ -28,16 +28,8 @@ class Welcome extends CI_Controller {
 		));
 		
 		$this->user = $this->session->userdata('user');
-		$_REQUEST += $_GET;
-		var_dump($this->facebook->getUser());
 		
-
-		
-		if ($this->user) {
-			die('user in session');
-			
-		}elseif ($this->facebook->getUser()){
-			die('login correct');
+		if ($this->facebook->getUser()){
 			try {
 				$facebook_user = $this->facebook->api('/me');
 				$this->session->set_userdata('user', array(
@@ -47,12 +39,14 @@ class Welcome extends CI_Controller {
 				log_message('error', $e);
 				redirect($this->facebook->getLoginUrl(array(
 						'scope' => 'email',
-						'redirect_uri' => site_url('login')
+						'redirect_uri' => site_url('welcome')
 				)), 'location');
 			}
+			$this->load->view('welcome');
 		}else{
 			$this->load->view('welcome');
 		}
+		
 	}
 
 	

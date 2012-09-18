@@ -1,6 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Welcome extends CI_Controller {
+	
+	public $user;
 
 	/**
 	 * Index Page for this controller.
@@ -19,11 +21,50 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
+		$this->load->library('session');
 		$this->load->library('facebook', array(
-				'appId' => '149275358530064',
-				'secret' => 'xxxxxxxxxxxxxxxxxxxxxxxxx'
+				'appId' => '444936682216984',
+				'secret' => '04e4807aa0c80407714936f3b5673362'
 		));
+		
+		$this->user = $this->session->userdata('user');
+	
 		$this->load->view('welcome_message');
+	}
+	
+	public function login()
+	{
+		if ($this->user) {
+			redirect(site_url(), 'location');
+		} elseif ($this->facebook->getUser()) {
+			try {
+				$facebook_user = $this->facebook->api('/me');
+				$this->session->set_userdata('user', array(
+						'name' => $facebook_user['name']
+				));
+			} catch (FacebookApiException $e) {
+				log_message('error', $e);
+				redirect($this->facebook->getLoginUrl(array(
+						'scope' => 'email',
+						'redirect_uri' => site_url('login')
+				)), 'location');
+			}
+		} else {
+			$data['facebook_login_url'] = $this->facebook->getLoginUrl(array(
+					'scope' => 'email',
+					'redirect_uri' => site_url('login')
+			));
+			$data['title'] = 'Entrar';
+			$data['page'] = 'login';
+			$this->load->view('view', $data);
+		}
+	}
+	
+	public function logout() {
+		session_destroy();
+		redirect($this->facebook->getLogoutUrl(array(
+				'next' => site_url()
+		)), 'location');
 	}
 }
 

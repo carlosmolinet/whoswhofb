@@ -1,0 +1,17 @@
+ <?php 
+ require_once("libraries/facebook/facebook.php");
+
+  $config = array();
+  $config[ÔappIdÕ] = '444936682216984';
+  $config[ÔsecretÕ] = '	04e4807aa0c80407714936f3b5673362';
+  $config[ÔfileUploadÕ] = false; // optional
+
+  $facebook = new Facebook($config);
+  
+$user = $facebook->getUser();
+if ($user) {
+  die('user'); // proceed knowing you have a logged in user who's authenticated
+} else {
+	die('not user');
+}
+  
